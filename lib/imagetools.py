@@ -30,7 +30,7 @@ class lodepng_error(RuntimeError):
 # Parse PNG file header
 # Taken from https://github.com/shibukawa/imagesize_py/blob/ffef30c1a4715c5acf90e8945ceb77f4a2ed2d45/imagesize.py#L63-L85
 
-@micropython.native
+# @micropython.native # disabled for compilation on mac m1
 def get_png_info(decoder, src, header):
     # Only handle variable image types
 
@@ -65,7 +65,7 @@ def get_png_info(decoder, src, header):
 
 # Convert color formats
 
-@micropython.viper
+# @micropython.viper # disabled for compilation on mac m1
 def convert_rgba8888_to_bgra5658(img_view):
     p = ptr32(img_view)
     p_out = ptr8(img_view)
@@ -84,7 +84,7 @@ def convert_rgba8888_to_bgra5658(img_view):
             ((r & 0b11111000) )
         p_out[i_out + 2] = a
 
-@micropython.viper
+# @micropython.viper # disabled for compilation on mac m1
 def convert_rgba8888_to_swapped_bgra5658(img_view):
     p = ptr32(img_view)
     p_out = ptr8(img_view)
@@ -103,7 +103,7 @@ def convert_rgba8888_to_swapped_bgra5658(img_view):
             ((g & 0b00011100) << 3)
         p_out[i_out + 2] = a
 
-@micropython.viper
+# @micropython.viper # disabled for compilation on mac m1
 def convert_rgba8888_to_bgra8888(img_view):
     p = ptr32(img_view)
     img_size = int(len(img_view)) // 4
@@ -121,7 +121,7 @@ def convert_rgba8888_to_bgra8888(img_view):
 
 # Read and parse PNG file
 
-@micropython.native
+# @micropython.native # disabled for compilation on mac m1
 def open_png(decoder, dsc):
     img_dsc = lv.img_dsc_t.__cast__(dsc.src)
     png_data = img_dsc.data
